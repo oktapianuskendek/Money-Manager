@@ -150,35 +150,8 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private void login(){
-        String username=tfUsername.getText();
-        String password=pfPassword.getText();
-        if(!username.isEmpty() && !password.isEmpty()){
-            try{
-                Connection con=ModuleDB.connectDB();
-                String sql="SELECT * FROM user WHERE username='"+username+"' AND password='"+password+"';";
-                Statement stmt=con.createStatement();
-                ResultSet result=stmt.executeQuery(sql);
-                if (!result.next()){
-                    showMessageDialog(null,"Username atau password salah!");
-                }
-                else{
-                    ModuleDB.idUser=result.getInt("id_user");
-                    ModuleDB.username=result.getString("username");
-                    ModuleDB.nama=result.getString("nama");
-                    ModuleDB.password=result.getString("password");
-                    new Beranda().setVisible(true);
-                    this.dispose();//menyembunyikan halaman login
-                }
-                con.close();
-            }
-            catch(Exception e){
-                showMessageDialog(null,e.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
-            }
-        }
-        else
-            showMessageDialog(null,"Username dan password harus terisi!");
-    }
+    
+    
     
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         login();
