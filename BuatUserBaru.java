@@ -20,6 +20,43 @@ public class BuatUserBaru extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    
+    private void buatUser(){
+    String username=tfUsername.getText();
+        String nama=tfNama.getText();
+        String password=String.valueOf(pfPassword.getPassword());
+        String confirmPass=String.valueOf(pfConfirmPassword.getPassword());
+        if(username.length()>=3 && nama.length()>=3 && password.length()>=6 && password.equals(confirmPass)){
+            try{
+                Connection con=ModuleDB.connectDB();
+                String sql="INSERT INTO user (username,nama,password) VALUES('"+username+"','"+nama+"','"+password+"');";
+                Statement stmt=con.createStatement();
+                stmt.executeUpdate(sql);
+                showMessageDialog(null,"User berhasil dibuat!");
+                con.close();
+                this.dispose();
+            }
+            catch(SQLException e){
+                showMessageDialog(null,e.getMessage(),"Error!",JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else if(username.length()<3)
+            showMessageDialog(null,"Username tidak boleh kurang dari 3 karakter!");
+        else if(nama.length()<3)
+            showMessageDialog(null,"Nama tidak boleh kurang dari 3 karakter");
+        else if(password.length()<6)
+            showMessageDialog(null,"Password minimal 6 karakter!");
+        else if(!password.equals(confirmPass))
+            showMessageDialog(null,"Password dan confirm password tidak cocok!");
+    }
+    
+    }
+    
+    
+    
+    
+    
+    
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
