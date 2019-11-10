@@ -6,7 +6,15 @@ import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 public class EditDataPengeluaran extends javax.swing.JFrame {
     private int idPengeluaran;
-   public EditDataPengeluaran(){
+    /**
+     * Creates new form EditDataPengeluaran
+     */
+    Beranda formBeranda;
+    private ComboBoxModel februariNonKabisat=new DefaultComboBoxModel(new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28"});
+    private ComboBoxModel februariKabisat=new DefaultComboBoxModel(new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29"});
+    private ComboBoxModel bln30hari=new DefaultComboBoxModel(new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"});
+    private ComboBoxModel bln31hari=new DefaultComboBoxModel(new String[]{"01","02","03","04","05","06","07","08","09","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31"});
+    public EditDataPengeluaran(){
         initComponents();
     }
     public EditDataPengeluaran(Beranda formBeranda,DefaultComboBoxModel model, int idPengeluaran, String jenisPengeluaranMulaMula, String tanggalMulaMula, String bulanMulaMula, String tahunMulaMula, String keteranganMulaMula, int jumlahMulaMula) {
@@ -208,7 +216,12 @@ public class EditDataPengeluaran extends javax.swing.JFrame {
     }//GEN-LAST:event_cbMonthActionPerformed
 
     private void cbYearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbYearActionPerformed
-
+        int bulan=cbMonth.getSelectedIndex()+1;
+        int tahun=Integer.parseInt(cbYear.getSelectedItem().toString());
+        if(bulan==2 && tahun%4!=0)
+            cbDay.setModel(februariNonKabisat);
+        else if(bulan==2 && tahun%4==0)
+            cbDay.setModel(februariKabisat);
     }//GEN-LAST:event_cbYearActionPerformed
 
     /**
